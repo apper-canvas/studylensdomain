@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "startTime": "2024-01-15T15:30:00Z",
+    "cardsReviewed": 5,
+    "correctAnswers": 4,
+    "endTime": "2024-01-15T15:45:00Z"
+  },
+  {
+    "id": "2",
+    "startTime": "2024-01-14T16:20:00Z",
+    "cardsReviewed": 3,
+    "correctAnswers": 3,
+    "endTime": "2024-01-14T16:30:00Z"
+  },
+  {
+    "id": "3",
+    "startTime": "2024-01-13T14:15:00Z",
+    "cardsReviewed": 8,
+    "correctAnswers": 6,
+    "endTime": "2024-01-13T14:35:00Z"
+  }
+]

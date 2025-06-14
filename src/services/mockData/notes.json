@@ -1,0 +1,72 @@
+[
+  {
+    "id": "1",
+    "content": "Photosynthesis Overview:\nPhotosynthesis is the process by which plants convert light energy into chemical energy.\n\nKey Components:\n• Chlorophyll - green pigment that captures light\n• Carbon dioxide - from atmosphere\n• Water - absorbed by roots\n• Sunlight - energy source\n\nChemical Equation:\n6CO2 + 6H2O + light energy → C6H12O6 + 6O2\n\nTwo Main Stages:\n1. Light-dependent reactions (occur in thylakoids)\n2. Light-independent reactions (Calvin cycle in stroma)\n\nImportance:\n- Produces oxygen for atmosphere\n- Forms base of food chain\n- Removes CO2 from atmosphere",
+    "createdAt": "2024-01-15T10:30:00Z",
+    "summary": "Photosynthesis is the process by which plants convert light energy into chemical energy\n• Chlorophyll - green pigment that captures light\n• Carbon dioxide - from atmosphere\n• Water - absorbed by roots\n• 6CO2 + 6H2O + light energy → C6H12O6 + 6O2",
+    "keyPoints": [
+      {
+        "id": 1,
+        "text": "Photosynthesis is the process by which plants convert light energy into chemical energy",
+        "importance": "high",
+        "highlighted": true
+      },
+      {
+        "id": 2,
+        "text": "Chlorophyll - green pigment that captures light",
+        "importance": "high",
+        "highlighted": true
+      },
+      {
+        "id": 3,
+        "text": "6CO2 + 6H2O + light energy → C6H12O6 + 6O2",
+        "importance": "high",
+        "highlighted": true
+      },
+      {
+        "id": 4,
+        "text": "Light-dependent reactions (occur in thylakoids)",
+        "importance": "medium",
+        "highlighted": false
+      },
+      {
+        "id": 5,
+        "text": "Light-independent reactions (Calvin cycle in stroma)",
+        "importance": "medium",
+        "highlighted": false
+      }
+    ]
+  },
+  {
+    "id": "2",
+    "content": "Newton's Laws of Motion\n\nFirst Law (Law of Inertia):\nAn object at rest stays at rest, and an object in motion stays in motion at constant velocity, unless acted upon by an unbalanced force.\n\nSecond Law:\nF = ma\nThe acceleration of an object is directly proportional to the net force acting on it and inversely proportional to its mass.\n\nThird Law:\nFor every action, there is an equal and opposite reaction.\n\nApplications:\n- Rocket propulsion\n- Walking (push against ground)\n- Car braking systems\n- Sports mechanics",
+    "createdAt": "2024-01-14T14:20:00Z",
+    "summary": "Newton's Laws of Motion\n• First Law (Law of Inertia): An object at rest stays at rest, and an object in motion stays in motion at constant velocity, unless acted upon by an unbalanced force\n• Second Law: F = ma\n• Third Law: For every action, there is an equal and opposite reaction",
+    "keyPoints": [
+      {
+        "id": 6,
+        "text": "First Law (Law of Inertia): An object at rest stays at rest, and an object in motion stays in motion at constant velocity, unless acted upon by an unbalanced force",
+        "importance": "high",
+        "highlighted": true
+      },
+      {
+        "id": 7,
+        "text": "Second Law: F = ma",
+        "importance": "high",
+        "highlighted": true
+      },
+      {
+        "id": 8,
+        "text": "Third Law: For every action, there is an equal and opposite reaction",
+        "importance": "high",
+        "highlighted": true
+      },
+      {
+        "id": 9,
+        "text": "Rocket propulsion",
+        "importance": "low",
+        "highlighted": false
+      }
+    ]
+  }
+]

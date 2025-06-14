@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "noteId": "1",
+    "question": "What is photosynthesis?",
+    "answer": "Photosynthesis is the process by which plants convert light energy into chemical energy",
+    "mastery": 0.8,
+    "lastReviewed": "2024-01-15T15:30:00Z"
+  },
+  {
+    "id": "2",
+    "noteId": "1",
+    "question": "What is the chemical equation for photosynthesis?",
+    "answer": "6CO2 + 6H2O + light energy → C6H12O6 + 6O2",
+    "mastery": 0.6,
+    "lastReviewed": "2024-01-15T15:32:00Z"
+  },
+  {
+    "id": "3",
+    "noteId": "1",
+    "question": "What are the two main stages of photosynthesis?",
+    "answer": "1. Light-dependent reactions (occur in thylakoids)\n2. Light-independent reactions (Calvin cycle in stroma)",
+    "mastery": 0.4,
+    "lastReviewed": "2024-01-15T15:35:00Z"
+  },
+  {
+    "id": "4",
+    "noteId": "2",
+    "question": "State Newton's First Law of Motion",
+    "answer": "An object at rest stays at rest, and an object in motion stays in motion at constant velocity, unless acted upon by an unbalanced force",
+    "mastery": 0.9,
+    "lastReviewed": "2024-01-14T16:20:00Z"
+  },
+  {
+    "id": "5",
+    "noteId": "2",
+    "question": "What is the formula for Newton's Second Law?",
+    "answer": "F = ma (Force equals mass times acceleration)",
+    "mastery": 0.7,
+    "lastReviewed": "2024-01-14T16:22:00Z"
+  }
+]
