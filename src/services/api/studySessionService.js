@@ -67,7 +67,72 @@ class StudySessionService {
       this.studySessions[index] = updatedSession;
       return { ...updatedSession };
     }
-    throw new Error('Study session not found');
+throw new Error('Study session not found');
+  }
+
+  async getStreak() {
+    await delay(150);
+    const sessions = [...this.studySessions]
+      .filter(s => s.endTime)
+      .sort((a, b) => new Date(b.startTime) - new Date(a.startTime));
+    
+    if (sessions.length === 0) return 0;
+
+    let streak = 0;
+    let currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+
+    for (const session of sessions) {
+      const sessionDate = new Date(session.startTime);
+      sessionDate.setHours(0, 0, 0, 0);
+      
+      const daysDiff = Math.floor((currentDate - sessionDate) / (1000 * 60 * 60 * 24));
+      
+      if (daysDiff === streak) {
+        streak++;
+        currentDate.setDate(currentDate.getDate() - 1);
+      } else if (daysDiff > streak) {
+        break;
+      }
+    }
+    
+    return streak;
+  }
+
+  async getReviewDates() {
+    await delay(200);
+    const today = new Date();
+    const reviewDates = [];
+    
+    // Generate review dates for next 30 days based on spaced repetition
+    for (let i = 1; i <= 30; i++) {
+      const date = new Date(today);
+      date.setDate(date.getDate() + i);
+      
+      // Schedule reviews on certain intervals (1, 3, 7, 14, 30 days)
+      if ([1, 3, 7, 14, 30].includes(i)) {
+        reviewDates.push({
+          Id: i,
+          date: date.toISOString().split('T')[0],
+          cardCount: Math.floor(Math.random() * 10) + 5,
+          priority: i <= 3 ? 'high' : i <= 7 ? 'medium' : 'low'
+        });
+      }
+    }
+    
+    return reviewDates;
+  }
+
+  async scheduleReview(date, cardIds) {
+    await delay(200);
+    // In a real app, this would schedule specific cards for review
+    return {
+      Id: Date.now(),
+      date,
+      cardIds,
+      scheduled: true,
+      createdAt: new Date().toISOString()
+    };
   }
 }
 

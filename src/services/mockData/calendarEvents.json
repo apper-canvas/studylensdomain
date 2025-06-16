@@ -1,0 +1,47 @@
+[
+  {
+    "Id": 1,
+    "date": "2024-01-15",
+    "title": "Biology Review Session",
+    "type": "review",
+    "cardCount": 12,
+    "priority": "high",
+    "completed": false
+  },
+  {
+    "Id": 2,
+    "date": "2024-01-16",
+    "title": "Chemistry Flashcards",
+    "type": "review",
+    "cardCount": 8,
+    "priority": "medium",
+    "completed": true
+  },
+  {
+    "Id": 3,
+    "date": "2024-01-17",
+    "title": "Math Practice",
+    "type": "practice",
+    "cardCount": 15,
+    "priority": "high",
+    "completed": false
+  },
+  {
+    "Id": 4,
+    "date": "2024-01-18",
+    "title": "History Review",
+    "type": "review",
+    "cardCount": 6,
+    "priority": "low",
+    "completed": false
+  },
+  {
+    "Id": 5,
+    "date": "2024-01-20",
+    "title": "Physics Study Session",
+    "type": "review",
+    "cardCount": 10,
+    "priority": "medium",
+    "completed": false
+  }
+]

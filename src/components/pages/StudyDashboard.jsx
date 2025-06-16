@@ -18,12 +18,13 @@ const StudyDashboard = () => {
   const [flashcards, setFlashcards] = useState([]);
   const [studyMode, setStudyMode] = useState('input'); // input, summary, flashcards
   const [currentSession, setCurrentSession] = useState(null);
+  const [streak, setStreak] = useState(0);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showExportModal, setShowExportModal] = useState(false);
-
-  useEffect(() => {
+useEffect(() => {
     loadInitialData();
+    loadStreak();
   }, []);
 
   const loadInitialData = async () => {
@@ -42,9 +43,17 @@ const StudyDashboard = () => {
       toast.error('Failed to load study materials');
     } finally {
       setLoading(false);
-    }
+}
   };
 
+  const loadStreak = async () => {
+    try {
+      const currentStreak = await studySessionService.getStreak();
+      setStreak(currentStreak);
+    } catch (err) {
+      console.error('Failed to load streak:', err);
+    }
+  };
   const handleNoteSubmit = async (content) => {
     if (!content.trim()) {
       toast.error('Please enter some notes to analyze');
@@ -144,7 +153,7 @@ const StudyDashboard = () => {
     }
   };
 
-  const ModeSelector = () => (
+const ModeSelector = () => (
     <div className="flex bg-surface rounded-lg p-1 mb-6">
       {[
         { id: 'input', label: 'Input Notes', icon: 'PenTool' },
@@ -277,11 +286,13 @@ const StudyDashboard = () => {
                         session={currentSession}
                       />
                     </div>
-                    <div className="lg:col-span-1">
+<div className="lg:col-span-1">
                       <StudyProgress
                         session={currentSession}
                         flashcards={flashcards}
                         onEndSession={handleEndSession}
+                        streak={streak}
+                        onStreakUpdate={loadStreak}
                       />
                     </div>
                   </div>

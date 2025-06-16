@@ -20,7 +20,7 @@ const Header = () => {
             <h1 className="text-xl font-bold text-gray-900">StudyLens</h1>
             <p className="text-xs text-gray-500">Transform notes into study materials</p>
           </div>
-        </div>
+</div>
         
         <div className="flex items-center space-x-4">
           <motion.div
@@ -31,6 +31,15 @@ const Header = () => {
             <span className="text-sm font-medium text-gray-700">AI Powered</span>
           </motion.div>
           
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => window.location.href = '/calendar'}
+            className="p-2 text-gray-600 hover:text-primary transition-colors rounded-lg hover:bg-surface"
+            title="Study Calendar"
+          >
+            <ApperIcon name="Calendar" className="w-5 h-5" />
+          </motion.button>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

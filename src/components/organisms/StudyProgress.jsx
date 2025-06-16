@@ -3,8 +3,7 @@ import ApperIcon from '@/components/ApperIcon';
 import Card from '@/components/atoms/Card';
 import Button from '@/components/atoms/Button';
 import CircularProgress from '@/components/atoms/CircularProgress';
-
-const StudyProgress = ({ session, flashcards = [], onEndSession }) => {
+const StudyProgress = ({ session, flashcards = [], onEndSession, streak = 0, onStreakUpdate }) => {
   if (!session) {
     return (
       <Card className="h-full flex items-center justify-center">
@@ -41,9 +40,21 @@ const StudyProgress = ({ session, flashcards = [], onEndSession }) => {
             <p className="text-sm text-gray-600">Current session stats</p>
           </div>
         </div>
-      </div>
+</div>
 
       <div className="p-4 space-y-6">
+        {/* Streak Counter */}
+        <div className="text-center bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-4">
+          <div className="flex items-center justify-center space-x-2 mb-2">
+            <ApperIcon name="Flame" className="w-5 h-5 text-orange-500" />
+            <span className="text-2xl font-bold text-gray-900">{streak}</span>
+          </div>
+          <div className="text-sm text-gray-600">Day Study Streak</div>
+          <div className="text-xs text-gray-500 mt-1">
+            Keep it up! 🔥
+          </div>
+        </div>
+
         {/* Session Accuracy */}
         <div className="text-center">
           <CircularProgress 
