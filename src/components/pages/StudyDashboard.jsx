@@ -1,17 +1,17 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { toast } from 'react-toastify';
-import { noteService, flashcardService, studySessionService } from '@/services';
-import NoteInput from '@/components/organisms/NoteInput';
-import SummaryDisplay from '@/components/organisms/SummaryDisplay';
-import KeyPointsSidebar from '@/components/organisms/KeyPointsSidebar';
-import FlashcardViewer from '@/components/organisms/FlashcardViewer';
-import StudyProgress from '@/components/organisms/StudyProgress';
-import ExportModal from '@/components/organisms/ExportModal';
-import LoadingState from '@/components/molecules/LoadingState';
-import ErrorState from '@/components/molecules/ErrorState';
-import EmptyState from '@/components/molecules/EmptyState';
-import ApperIcon from '@/components/ApperIcon';
+import React, { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { flashcardService, noteService, studySessionService } from "@/services";
+import NoteInput from "@/components/organisms/NoteInput";
+import SummaryDisplay from "@/components/organisms/SummaryDisplay";
+import KeyPointsSidebar from "@/components/organisms/KeyPointsSidebar";
+import FlashcardViewer from "@/components/organisms/FlashcardViewer";
+import StudyProgress from "@/components/organisms/StudyProgress";
+import ExportModal from "@/components/organisms/ExportModal";
+import LoadingState from "@/components/molecules/LoadingState";
+import ErrorState from "@/components/molecules/ErrorState";
+import EmptyState from "@/components/molecules/EmptyState";
+import ApperIcon from "@/components/ApperIcon";
 const StudyDashboard = () => {
   const [notes, setNotes] = useState([]);
   const [currentNote, setCurrentNote] = useState(null);
@@ -154,25 +154,30 @@ useEffect(() => {
   };
 
 const ModeSelector = () => (
-    <div className="flex bg-surface rounded-lg p-1 mb-6">
+    <div className="flex flex-col sm:flex-row bg-surface rounded-lg p-1 mb-4 sm:mb-6 gap-1 sm:gap-0">
       {[
-        { id: 'input', label: 'Input Notes', icon: 'PenTool' },
-        { id: 'summary', label: 'Summary', icon: 'FileText' },
-        { id: 'flashcards', label: 'Study Cards', icon: 'Brain' }
+        { id: 'input', label: 'Input Notes', icon: 'PenTool', shortLabel: 'Input' },
+        { id: 'summary', label: 'Summary', icon: 'FileText', shortLabel: 'Summary' },
+        { id: 'flashcards', label: 'Study Cards', icon: 'Brain', shortLabel: 'Cards' }
       ].map((mode) => (
         <motion.button
           key={mode.id}
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
           onClick={() => setStudyMode(mode.id)}
-          className={`flex-1 flex items-center justify-center space-x-2 py-2 px-4 rounded-md transition-all ${
+          className={`flex-1 flex items-center justify-center space-x-1 sm:space-x-2 py-3 sm:py-2 px-2 sm:px-4 rounded-md transition-all touch-manipulation ${
             studyMode === mode.id
               ? 'bg-primary text-white shadow-sm'
               : 'text-gray-600 hover:text-primary'
           }`}
         >
-          <ApperIcon name={mode.icon} className="w-4 h-4" />
-          <span className="text-sm font-medium">{mode.label}</span>
+          <ApperIcon name={mode.icon} className="w-4 h-4 flex-shrink-0" />
+          <span className="text-xs sm:text-sm font-medium hidden xs:inline">
+            {mode.label}
+          </span>
+          <span className="text-xs sm:text-sm font-medium xs:hidden">
+            {mode.shortLabel}
+          </span>
         </motion.button>
       ))}
     </div>
@@ -197,12 +202,12 @@ const ModeSelector = () => (
     );
   }
 
-  return (
-    <div className="h-full overflow-hidden">
-      <div className="max-w-7xl mx-auto p-6 h-full flex flex-col">
+return (
+    <div className="h-full overflow-y-auto">
+      <div className="container mx-auto responsive-padding h-full flex flex-col max-w-7xl">
         <ModeSelector />
         
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1 min-h-0">
           <AnimatePresence mode="wait">
             {studyMode === 'input' && (
               <motion.div
@@ -210,7 +215,7 @@ const ModeSelector = () => (
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
-                className="h-full"
+className="h-full flex flex-col"
               >
                 {notes.length === 0 ? (
                   <EmptyState
@@ -235,19 +240,19 @@ const ModeSelector = () => (
               <motion.div
                 key="summary"
                 initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
+animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
-                className="h-full grid grid-cols-1 lg:grid-cols-4 gap-6"
+                className="h-full flex flex-col lg:grid lg:grid-cols-4 gap-4 lg:gap-6"
               >
-                <div className="lg:col-span-3">
+                <div className="lg:col-span-3 min-h-0 flex-1">
                   <SummaryDisplay 
                     note={currentNote}
                     onStartStudy={handleStartStudySession}
                     onExport={() => setShowExportModal(true)}
                   />
-                </div>
-                <div className="lg:col-span-1">
-                  <KeyPointsSidebar 
+</div>
+                <div className="lg:col-span-1 flex-shrink-0">
+                  <KeyPointsSidebar
                     keyPoints={currentNote.keyPoints}
                     onPointUpdate={(pointId, updates) => {
                       const updatedKeyPoints = currentNote.keyPoints.map(point =>
@@ -265,10 +270,10 @@ const ModeSelector = () => (
                 key="flashcards"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
-                className="h-full"
+exit={{ opacity: 0, x: 20 }}
+                className="h-full flex flex-col"
               >
-                {flashcards.length === 0 ? (
+{flashcards.length === 0 ? (
                   <EmptyState
                     icon="Brain"
                     title="No Flashcards Available"
@@ -277,8 +282,8 @@ const ModeSelector = () => (
                     onAction={() => setStudyMode('input')}
                   />
                 ) : (
-                  <div className="h-full grid grid-cols-1 lg:grid-cols-4 gap-6">
-                    <div className="lg:col-span-3">
+                  <div className="h-full flex flex-col lg:grid lg:grid-cols-4 gap-4 lg:gap-6">
+                    <div className="lg:col-span-3 min-h-0 flex-1">
                       <FlashcardViewer
                         flashcards={flashcards}
                         onAnswer={handleFlashcardAnswer}
@@ -286,7 +291,7 @@ const ModeSelector = () => (
                         session={currentSession}
                       />
                     </div>
-<div className="lg:col-span-1">
+                    <div className="lg:col-span-1 flex-shrink-0">
                       <StudyProgress
                         session={currentSession}
                         flashcards={flashcards}

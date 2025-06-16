@@ -1,15 +1,15 @@
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isToday, parseISO, isSameDay } from 'date-fns';
-import { toast } from 'react-toastify';
-import studyCalendarService from '@/services/api/studyCalendarService';
-import studySessionService from '@/services/api/studySessionService';
-import ApperIcon from '@/components/ApperIcon';
-import Card from '@/components/atoms/Card';
-import Button from '@/components/atoms/Button';
-import Badge from '@/components/atoms/Badge';
-import LoadingState from '@/components/molecules/LoadingState';
-import ErrorState from '@/components/molecules/ErrorState';
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { eachDayOfInterval, endOfMonth, format, isSameDay, isSameMonth, isToday, parseISO, startOfMonth } from "date-fns";
+import { toast } from "react-toastify";
+import studyCalendarService from "@/services/api/studyCalendarService";
+import studySessionService from "@/services/api/studySessionService";
+import ApperIcon from "@/components/ApperIcon";
+import Card from "@/components/atoms/Card";
+import Button from "@/components/atoms/Button";
+import Badge from "@/components/atoms/Badge";
+import LoadingState from "@/components/molecules/LoadingState";
+import ErrorState from "@/components/molecules/ErrorState";
 
 const StudyCalendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -131,34 +131,33 @@ const StudyCalendar = () => {
     );
   }
 
-  return (
-    <div className="h-full overflow-hidden">
-      <div className="max-w-7xl mx-auto p-6 h-full flex flex-col">
+return (
+    <div className="h-full overflow-y-auto">
+      <div className="container mx-auto responsive-padding h-full flex flex-col max-w-7xl">
         {/* Header with Streak Counter */}
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-1">Study Calendar</h1>
-            <p className="text-gray-600">Track your study schedule and maintain your streak</p>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 sm:mb-6">
+          <div className="flex-1">
+            <h1 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Study Calendar</h1>
+            <p className="text-sm sm:text-base text-gray-600">Track your study schedule and maintain your streak</p>
           </div>
-          
           <motion.div
             whileHover={{ scale: 1.02 }}
-            className="bg-gradient-to-r from-primary to-secondary p-4 rounded-lg text-white"
+            className="bg-gradient-to-r from-primary to-secondary p-3 sm:p-4 rounded-lg text-white flex-shrink-0"
           >
-            <div className="flex items-center space-x-3">
-              <ApperIcon name="Flame" className="w-6 h-6" />
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <ApperIcon name="Flame" className="w-5 h-5 sm:w-6 sm:h-6" />
               <div>
-                <div className="text-2xl font-bold">{streak}</div>
-                <div className="text-sm opacity-90">Day Streak</div>
+                <div className="text-xl sm:text-2xl font-bold">{streak}</div>
+                <div className="text-xs sm:text-sm opacity-90">Day Streak</div>
               </div>
             </div>
           </motion.div>
         </div>
 
-        <div className="flex-1 grid grid-cols-1 lg:grid-cols-3 gap-6 overflow-hidden">
+        <div className="flex-1 flex flex-col lg:grid lg:grid-cols-3 gap-4 lg:gap-6 min-h-0">
           {/* Calendar Grid */}
-          <div className="lg:col-span-2">
-            <Card className="h-full">
+          <div className="lg:col-span-2 min-h-0 flex-1">
+            <Card className="h-full flex flex-col">
               <div className="p-4 border-b border-gray-100">
                 <div className="flex items-center justify-between">
                   <h2 className="text-lg font-semibold text-gray-900">
@@ -183,17 +182,16 @@ const StudyCalendar = () => {
                 </div>
               </div>
 
-              <div className="p-4">
+              <div className="p-2 sm:p-4 overflow-y-auto">
                 {/* Day Headers */}
                 <div className="grid grid-cols-7 gap-1 mb-2">
                   {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                    <div key={day} className="p-2 text-center text-sm font-medium text-gray-500">
+                    <div key={day} className="p-1 sm:p-2 text-center text-xs sm:text-sm font-medium text-gray-500">
                       {day}
                     </div>
                   ))}
                 </div>
-
-                {/* Calendar Days */}
+{/* Calendar Days */}
                 <div className="grid grid-cols-7 gap-1">
                   {calendarDays.map(day => {
                     const dayEvents = getEventsForDate(day);
@@ -206,17 +204,16 @@ const StudyCalendar = () => {
                         whileTap={{ scale: 0.98 }}
                         onClick={() => setSelectedDate(day)}
                         className={`
-                          relative p-2 min-h-[80px] rounded-lg border transition-all
+                          relative p-1 sm:p-2 min-h-[60px] sm:min-h-[80px] rounded-lg border transition-all touch-manipulation
                           ${isToday(day) ? 'border-primary bg-primary/5' : 'border-gray-200'}
                           ${isSelected ? 'ring-2 ring-primary' : ''}
                           ${!isSameMonth(day, currentDate) ? 'text-gray-400' : 'text-gray-900'}
-                          hover:bg-gray-50
+                          hover:bg-gray-50 active:bg-gray-100
                         `}
                       >
-                        <div className="text-sm font-medium mb-1">
+                        <div className="text-xs sm:text-sm font-medium mb-1">
                           {format(day, 'd')}
                         </div>
-                        
                         <div className="space-y-1">
                           {dayEvents.slice(0, 2).map(event => (
                             <div
@@ -228,7 +225,7 @@ const StudyCalendar = () => {
                             />
                           ))}
                           {dayEvents.length > 2 && (
-                            <div className="text-xs text-gray-500">
+                            <div className="text-xs text-gray-500 hidden sm:block">
                               +{dayEvents.length - 2} more
                             </div>
                           )}
@@ -242,16 +239,15 @@ const StudyCalendar = () => {
           </div>
 
           {/* Event Details Sidebar */}
-          <div className="lg:col-span-1">
-            <Card className="h-full">
+          <div className="lg:col-span-1 flex-shrink-0">
+            <Card className="h-full max-h-96 lg:max-h-full">
               <div className="p-4 border-b border-gray-100">
                 <h3 className="font-semibold text-gray-900">
                   {selectedDate ? format(selectedDate, 'MMMM d, yyyy') : 'Select a date'}
                 </h3>
               </div>
-
-              <div className="p-4 space-y-4 overflow-y-auto">
-                {selectedDate && selectedDateEvents.length > 0 ? (
+<div className="p-3 sm:p-4 space-y-3 sm:space-y-4 overflow-y-auto">
+                {selectedDateEvents.length > 0 ? (
                   selectedDateEvents.map(event => (
                     <motion.div
                       key={event.Id}
@@ -273,7 +269,7 @@ const StudyCalendar = () => {
                         {event.cardCount} cards to review
                       </p>
 
-                      <div className="flex space-x-2">
+                      <div className="flex flex-col sm:flex-row gap-2">
                         {!event.completed && (
                           <Button
                             onClick={() => handleMarkCompleted(event.Id)}
