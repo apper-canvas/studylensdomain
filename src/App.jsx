@@ -3,7 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Layout from '@/Layout';
 import { routeArray } from '@/config/routes';
-
+import ApperIcon from '@/components/ApperIcon';
 function App() {
   return (
     <BrowserRouter>
