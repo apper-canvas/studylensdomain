@@ -11,7 +11,7 @@ import ExportModal from '@/components/organisms/ExportModal';
 import LoadingState from '@/components/molecules/LoadingState';
 import ErrorState from '@/components/molecules/ErrorState';
 import EmptyState from '@/components/molecules/EmptyState';
-
+import ApperIcon from '@/components/ApperIcon';
 const StudyDashboard = () => {
   const [notes, setNotes] = useState([]);
   const [currentNote, setCurrentNote] = useState(null);
